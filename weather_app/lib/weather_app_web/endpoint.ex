@@ -7,7 +7,7 @@ defmodule WeatherAppWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_weather_app_key",
-    signing_salt: "bjDeoK8U",
+    signing_salt: "Y7LGJeSj",
     same_site: "Lax"
   ]
 

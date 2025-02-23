@@ -20,7 +20,7 @@ config :weather_app, WeatherAppWeb.Endpoint,
     layout: false
   ],
   pubsub_server: WeatherApp.PubSub,
-  live_view: [signing_salt: "kgtxn3Rc"]
+  live_view: [signing_salt: "/NplfZ3t"]
 
 # Configures the mailer
 #

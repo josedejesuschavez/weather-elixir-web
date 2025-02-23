@@ -17,7 +17,7 @@ config :weather_app, WeatherApp.Repo,
 # you can enable the server option below.
 config :weather_app, WeatherAppWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "q4nHAEDQFA5jJuOaK5E2adULzUpJULTNlfwCQ1KSU5O7kT78Qf9TbDDYiZAn55Xh",
+  secret_key_base: "N5jnoPwwEDL0cqyjLfEGsQiuIkZSpNjdv27jDIbJZLMUHzcVw9jC+BHm4CbFk1Yg",
   server: false
 
 # In test we don't send emails

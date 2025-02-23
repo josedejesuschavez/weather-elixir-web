@@ -23,7 +23,7 @@ config :weather_app, WeatherAppWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "B2rQn4I/X/5Naqv+aD9/53rcepijTOoxtQqlMhq0tVy1uFCyIiCxS6BsfuRHj7gi",
+  secret_key_base: "MUNdBzcaAIWRbiiqOvDuGA0bACooeng+YfuzY8/KCfFggc4nRIac2bJkHeGAUF94",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:weather_app, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:weather_app, ~w(--watch)]}
