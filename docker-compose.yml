@@ -2,17 +2,23 @@ services:
   web:
     build:
       context: ./weather_app
-    command: mix phx.server
+    #command: mix phx.server
+    command: sh -c "mix deps.get && mix phx.server"
+    #command: tail -f /dev/null
     volumes:
-      - .:/app
-      - /app/deps
-      - /app/_build
+      - .:/app#  
+    #  - /app/des
+    #  - /app/_build
     ports:
       - "4000:4000"
     depends_on:
       - db
     environment:
       DATABASE_URL: "ecto://weather-db:u_6QbMeb_crm9K4P@db:5432/weather-db"
+    #restart: always
+    networks:
+      - weather_network
+
   db:
     image: postgres:16.2
     expose:
@@ -26,9 +32,10 @@ services:
     volumes:
       - ./postgresql:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d
-    #networks:
-    #  - miel_network
-    #command: -p 5434
+    restart: always
+    networks:
+      - weather_network
+
   adminer:
     image: adminer
     restart: always
@@ -36,5 +43,9 @@ services:
       - "8080:8080"
     depends_on:
       - db
-    #networks:
-    #  - miel_network
+    networks:
+      - weather_network
+
+networks:
+  weather_network:
+    driver: bridge
