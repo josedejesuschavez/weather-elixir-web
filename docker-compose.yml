@@ -1,0 +1,29 @@
+services:
+
+  db:
+    image: postgres:16.2
+    expose:
+      - "5434"
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: 'weather-db'
+      POSTGRES_PASSWORD: 'u_6QbMeb_crm9K4P'
+      POSTGRES_DB: 'weather-db'
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    env_file:
+      - .env
+    #networks:
+    #  - miel_network
+    command: -p 5434
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    #networks:
+    #  - miel_network
