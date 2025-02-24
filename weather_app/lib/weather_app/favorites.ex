@@ -7,15 +7,18 @@ defmodule WeatherApp.Favorites do
     Repo.all(Favorite)
   end
 
-  def add_favorite(city) do
+  def get_favorite!(id), do: Repo.get!(Favorite, id)
+
+  def create_favorite(attrs \\ %{}) do
     %Favorite{}
-    |> Favorite.changeset(%{city: city})
+    |> Favorite.changeset(attrs)
     |> Repo.insert()
   end
 
-  def remove_favorite(id) do
-    favorite = Repo.get!(Favorite, id)
-    Repo.delete(favorite)
+  def update_favorite(%Favorite{} = favorite, attrs) do
+    favorite
+    |> Favorite.changeset(attrs)
+    |> Repo.update()
   end
 
   def delete_favorite(%Favorite{} = favorite) do

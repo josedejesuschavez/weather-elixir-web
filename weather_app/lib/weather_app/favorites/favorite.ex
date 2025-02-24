@@ -4,9 +4,11 @@ defmodule WeatherApp.Favorites.Favorite do
 
   schema "favorites" do
     field :city, :string
-    timestamps()
+
+    timestamps(type: :utc_datetime)
   end
 
+  @doc false
   def changeset(favorite, attrs) do
     favorite
     |> cast(attrs, [:city])

@@ -1,0 +1,24 @@
+<h1>Favorites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>City</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for favorite <- @favorites do %>
+      <tr>
+        <td><%= favorite.city %></td>
+        <td>
+          <%= link "Show", to: Routes.favorite_path(@conn, :show, favorite) %>
+          <%= link "Edit", to: Routes.favorite_path(@conn, :edit, favorite) %>
+          <%= link "Delete", to: Routes.favorite_path(@conn, :delete, favorite), method: :delete, data: [confirm: "Are you sure?"] %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link "New Favorite", to: Routes.favorite_path(@conn, :new) %>
