@@ -8,12 +8,20 @@ services:
     #command: tail -f /dev/null
     #command: sh -c "mix ecto.migrate && mix phx.server"
     #command: sh -c "mix deps.get && mix ecto.create && mix ecto.migrate && mix phx.server"
+    command: >
+      sh -c "mix deps.get &&
+      mix deps.compile &&
+      mix compile &&
+      /usr/local/bin/wait-for-it.sh db:5432 &&
+      mix ecto.create &&
+      mix ecto.migrate &&
+      mix phx.server"
     #volumes:
     #  - ./weather_app:/app
     #  - /app/deps
     #  - /app/_build
-    #volumes:
-    #  - ./weather_app:/app
+    volumes:
+      - ./weather_app:/app
     #  - /app/des
     #  - /app/_build
     ports:

@@ -17,4 +17,12 @@ defmodule WeatherApp.Favorites do
     favorite = Repo.get!(Favorite, id)
     Repo.delete(favorite)
   end
+
+  def delete_favorite(%Favorite{} = favorite) do
+    Repo.delete(favorite)
+  end
+
+  def change_favorite(%Favorite{} = favorite) do
+    Favorite.changeset(favorite, %{})
+  end
 end
