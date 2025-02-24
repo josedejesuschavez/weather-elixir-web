@@ -22,8 +22,8 @@ defmodule WeatherAppWeb.WeatherLive.Search do
       {:ok, _favorite} ->
         {:noreply, socket |> put_flash(:info, "#{city} added to favorites.")}
 
-      {:error, _changeset} ->
-        {:noreply, socket |> put_flash(:error, "Failed to add #{city} to favorites.")}
+      {:error, error_message} ->
+        {:noreply, socket |> put_flash(:error, "Failed to add #{city} to favorites: #{error_message}.")}
     end
   end
 end
