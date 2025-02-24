@@ -10,25 +10,34 @@ defmodule WeatherApp.Favorites do
   def get_favorite!(id), do: Repo.get!(Favorite, id)
 
   def create_favorite(attrs \\ %{}) do
-    changeset = Favorite.changeset(%Favorite{}, attrs)
-    if changeset.valid? do
-      case Repo.insert(changeset) do
-        {:ok, favorite} ->
-          IO.puts("Favorite inserted successfully.")
-          {:ok, favorite}
-        {:error, changeset} ->
-          IO.puts("Insert failed.")
-          IO.inspect(changeset.errors, label: "Insert failed with errors")
+    city = Map.get(attrs, "city")
+
+    # Verificar si la ciudad ya existe
+    case Repo.get_by(Favorite, city: city) do
+      nil ->
+        # La ciudad no existe, intentar insertar
+        changeset = Favorite.changeset(%Favorite{}, attrs)
+        if changeset.valid? do
+          case Repo.insert(changeset) do
+            {:ok, favorite} ->
+              IO.puts("Favorite inserted successfully.")
+              {:ok, favorite}
+            {:error, changeset} ->
+              IO.puts("Insert failed.")
+              IO.inspect(changeset.errors, label: "Insert failed with errors")
+              {:error, changeset}
+          end
+        else
+          IO.puts("Changeset is invalid.")
+          IO.inspect(changeset.errors, label: "Changeset errors")
           {:error, changeset}
-      end
-    else
-      IO.puts("Changeset is invalid.")
-      IO.inspect(changeset.errors, label: "Changeset errors")
-      {:error, changeset}
+        end
+
+      _favorite ->
+        # La ciudad ya existe
+        IO.puts("City already exists in favorites.")
+        {:error, "City already exists in favorites."}
     end
-    #%Favorite{}
-    #|> Favorite.changeset(attrs)
-    #|> Repo.insert()
   end
 
   def update_favorite(%Favorite{} = favorite, attrs) do
