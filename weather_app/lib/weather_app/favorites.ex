@@ -10,9 +10,25 @@ defmodule WeatherApp.Favorites do
   def get_favorite!(id), do: Repo.get!(Favorite, id)
 
   def create_favorite(attrs \\ %{}) do
-    %Favorite{}
-    |> Favorite.changeset(attrs)
-    |> Repo.insert()
+    changeset = Favorite.changeset(%Favorite{}, attrs)
+    if changeset.valid? do
+      case Repo.insert(changeset) do
+        {:ok, favorite} ->
+          IO.puts("Favorite inserted successfully.")
+          {:ok, favorite}
+        {:error, changeset} ->
+          IO.puts("Insert failed.")
+          IO.inspect(changeset.errors, label: "Insert failed with errors")
+          {:error, changeset}
+      end
+    else
+      IO.puts("Changeset is invalid.")
+      IO.inspect(changeset.errors, label: "Changeset errors")
+      {:error, changeset}
+    end
+    #%Favorite{}
+    #|> Favorite.changeset(attrs)
+    #|> Repo.insert()
   end
 
   def update_favorite(%Favorite{} = favorite, attrs) do

@@ -1,20 +1,107 @@
-<h1>Search City Weather</h1>
+<style>
+  h1 {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-<.form let={f} for={@city} phx-submit="search">
-  <div>
-    <%= label f, :city, "City" %>
-    <%= text_input f, :city %>
-  </div>
-  <div>
-    <%= submit "Search" %>
-  </div>
-</.form>
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+
+  .form-container div {
+    margin-bottom: 15px;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+  }
+
+  h2, h3 {
+    text-align: center;
+    color: #555;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  ul li {
+    margin: 5px 0;
+    text-align: center;
+  }
+
+    .favorite-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .favorite-button:hover {
+    background-color: #0056b3;
+  }
+
+  .error {
+    color: #fff;
+    background-color: #f44336; /* Un rojo brillante para destacar */
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+</style>
+<.header>
+  <h1>Search City Weather</h1>
+  <:actions>
+    <.link href={~p"/favorites"}>
+        <.button>Go to favorites cities</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<div class="form-container">
+  <.form for={@form} phx-submit="search">
+    <div>
+      <.input field={@form[:city]} name="city" label="City" value={@form["city"]} />
+    </div>
+    <div>
+      <.button>Search</.button>
+    </div>
+  </.form>
+</div>
 
 <%= if @weather do %>
   <h2>Weather for <%= @weather["location"]["name"] %></h2>
   <p>Temperature: <%= @weather["current"]["temp_c"] %>°C</p>
   <p>Condition: <%= @weather["current"]["condition"]["text"] %></p>
-  <p><img src="<%= @weather["current"]["condition"]["icon"] %>" alt="Weather icon"></p>
+  <p><img src={"https:" <> @weather["current"]["condition"]["icon"]} alt="Weather icon"></p>
+  <button class="favorite-button" phx-click="add_to_favorites" phx-value-city={@weather["location"]["name"]}>Add to Favorites</button>
+
+  <%= if is_list(@weather["forecast"]["forecastday"]) do %>
+    <h3>Hourly Temperature for the next 24 hours</h3>
+    <ul>
+      <%= for hour <- Enum.at(@weather["forecast"]["forecastday"], 0)["hour"] do %>
+        <li><%= hour["time"] %>: <%= hour["temp_c"] %>°C</li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>
 
 <%= if @error do %>

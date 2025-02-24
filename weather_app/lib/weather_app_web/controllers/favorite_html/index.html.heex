@@ -1,20 +1,14 @@
 <.header>
   Listing Favorites
   <:actions>
-    <.link href={~p"/favorites/new"}>
-      <.button>New Favorite</.button>
+    <.link href={~p"/search"}>
+      <.button>Search City Weather</.button>
     </.link>
   </:actions>
 </.header>
 
-<.table id="favorites" rows={@favorites} row_click={&JS.navigate(~p"/favorites/#{&1}")}>
+<.table id="favorites" rows={@favorites}>
   <:col :let={favorite} label="City">{favorite.city}</:col>
-  <:action :let={favorite}>
-    <div class="sr-only">
-      <.link navigate={~p"/favorites/#{favorite}"}>Show</.link>
-    </div>
-    <.link navigate={~p"/favorites/#{favorite}/edit"}>Edit</.link>
-  </:action>
   <:action :let={favorite}>
     <.link href={~p"/favorites/#{favorite}"} method="delete" data-confirm="Are you sure?">
       Delete

@@ -17,7 +17,7 @@ defmodule WeatherAppWeb.Router do
   scope "/", WeatherAppWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", FavoriteController, :index
     resources "/favorites", FavoriteController
     live "/search", WeatherLive.Search
   end

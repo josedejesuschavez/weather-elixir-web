@@ -9,7 +9,7 @@ defmodule WeatherApp.Weather do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, Jason.decode!(body)}
       {:ok, %HTTPoison.Response{status_code: status_code}} ->
-        {:error, "Failed to fetch weather data. Status code: #{status_code}"}
+        {:error, "Invalid city. Please provide a valid city name."}
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, "Failed to fetch weather data. Reason: #{reason}"}
     end
