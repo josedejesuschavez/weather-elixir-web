@@ -6,6 +6,12 @@ services:
     #command: sh -c "mix phx.server"
     #command: sh -c "mix phx.server"
     #command: tail -f /dev/null
+    #command: sh -c "mix ecto.migrate && mix phx.server"
+    #command: sh -c "mix deps.get && mix ecto.create && mix ecto.migrate && mix phx.server"
+    #volumes:
+    #  - ./weather_app:/app
+    #  - /app/deps
+    #  - /app/_build
     #volumes:
     #  - ./weather_app:/app
     #  - /app/des
@@ -16,7 +22,7 @@ services:
       - db
     environment:
       DATABASE_URL: "ecto://weather-db:u_6QbMeb_crm9K4P@db:5432/weather-db"
-    #restart: always
+    restart: always
     networks:
       - weather_network
 
