@@ -3,7 +3,8 @@ services:
     build:
       context: ./weather_app
     #command: mix phx.server
-    command: sh -c "mix deps.get && mix phx.server"
+    command: sh -c "mix deps.get && mix ecto.create && mix ecto.migrate && mix phx.server"
+    #command: sh -c "mix phx.server"
     #command: tail -f /dev/null
     volumes:
       - .:/app#  
