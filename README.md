@@ -17,6 +17,15 @@ Desarrollamos una aplicación web utilizando Elixir y Phoenix que permite a los 
 - Ver el clima mínimo y máximo por día para el resto de la semana.
 - Guardar ciudades favoritas para un acceso rápido.
 
+## Tecnologías Usadas
+
+El proyecto fue desarrollado utilizando las siguientes tecnologías:
+
+- **Phoenix**: El framework web para Elixir, utilizado para construir la aplicación web en tiempo real.
+- **Elixir**: El lenguaje de programación funcional y concurrente sobre el que está basado Phoenix.
+- **PostgreSQL**: Base de datos relacional utilizada para almacenar las ciudades favoritas de los usuarios.
+- **Docker**: Herramienta utilizada para contenerizar la aplicación, facilitando su despliegue y ejecución en diferentes entornos.
+
 ## Arquitectura
 
 ### Estructura del Proyecto
@@ -44,8 +53,10 @@ El proyecto está estructurado de la siguiente manera:
 ### Mejoras Futuras
 
 - **Autenticación de Usuarios**: Implementar un sistema de autenticación para que los usuarios puedan guardar sus ciudades favoritas de manera personalizada.
-  
-- **Notificaciones**: Agregar notificaciones para alertar a los usuarios sobre cambios significativos en el clima de sus ciudades favoritas.
+
+- **Pruebas Unitarias**: Implementar pruebas unitarias para asegurar la calidad del código y el funcionamiento correcto de los diferentes módulos de la aplicación.
+
+- **Arquitectura Limpia (Clean Architecture)**: Reestructurar el código para seguir los principios de la arquitectura limpia, lo cual mejorará la mantenibilidad, escalabilidad y separación de preocupaciones en el proyecto.
   
 - **Optimización de Consultas**: Mejorar las consultas a la base de datos para manejar mejor grandes volúmenes de datos y usuarios concurrentes.
 
@@ -54,7 +65,5 @@ El proyecto está estructurado de la siguiente manera:
 ## Cómo Ejecutar el Proyecto
 
 1. Clona el repositorio.
-2. Instala las dependencias con `mix deps.get`.
-3. Crea y migra la base de datos con `mix ecto.create` y `mix ecto.migrate`.
-4. Inicia el servidor Phoenix con `mix phx.server`.
-5. Abre tu navegador y navega a [http://localhost:4000](http://localhost:4000) para ver la aplicación en acción.
+2. Ejecutar docker compose up --build o make build
+3. Abre tu navegador y navega a [http://localhost:4000](http://localhost:4000) para ver la aplicación en acción.
