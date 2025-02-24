@@ -1,0 +1,22 @@
+<h1>Search City Weather</h1>
+
+<.form let={f} for={@city} phx-submit="search">
+  <div>
+    <%= label f, :city, "City" %>
+    <%= text_input f, :city %>
+  </div>
+  <div>
+    <%= submit "Search" %>
+  </div>
+</.form>
+
+<%= if @weather do %>
+  <h2>Weather for <%= @weather["location"]["name"] %></h2>
+  <p>Temperature: <%= @weather["current"]["temp_c"] %>°C</p>
+  <p>Condition: <%= @weather["current"]["condition"]["text"] %></p>
+  <p><img src="<%= @weather["current"]["condition"]["icon"] %>" alt="Weather icon"></p>
+<% end %>
+
+<%= if @error do %>
+  <p class="error"><%= @error %></p>
+<% end %>

@@ -19,8 +19,7 @@ defmodule WeatherAppWeb.Router do
 
     get "/", PageController, :home
     resources "/favorites", FavoriteController
-    get "/search", WeatherController, :search
-    post "/search", WeatherController, :search_results
+    live "/search", WeatherLive.Search
   end
 
   scope "/api", WeatherAppWeb do
