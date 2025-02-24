@@ -6,7 +6,7 @@ defmodule WeatherAppWeb.FavoriteController do
 
   def index(conn, _params) do
     favorites = Favorites.list_favorites()
-    render(conn, "index.html", favorites: favorites)
+    render(conn, :index, favorites: favorites)
   end
 
   def new(conn, _params) do
