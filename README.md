@@ -65,5 +65,7 @@ El proyecto está estructurado de la siguiente manera:
 ## Cómo Ejecutar el Proyecto
 
 1. Clona el repositorio.
-2. Ejecutar docker compose up --build o make build
+2. Ejecutar ```bash
+    docker compose up --build
+    o make build
 3. Abre tu navegador y navega a [http://localhost:4000](http://localhost:4000) para ver la aplicación en acción.
