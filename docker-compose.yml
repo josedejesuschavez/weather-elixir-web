@@ -6,8 +6,8 @@ services:
     #command: sh -c "mix phx.server"
     #command: sh -c "mix phx.server"
     #command: tail -f /dev/null
-    volumes:
-      - ./weather_app:/app
+    #volumes:
+    #  - ./weather_app:/app
     #  - /app/des
     #  - /app/_build
     ports:
